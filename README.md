@@ -18,7 +18,7 @@ As such, I have built a tool that would keep my benefits of using a module loade
   - `lua/autorun/client` and `lua/autorun/server` for addons.
   - `gamemode/cl_init.lua` and `gamemode/init.lua` for gamemodes.
 - CI friendly, can be used as a build step when deploying your addons & gamemodes to servers.
-- Tiny! Using .NET's AOT, the binary is self-contained and does not require a .NET runtime to function.
+- Tiny! Using .NET's Native AOT, the binary is self-contained and does not require a .NET runtime to function.
 
 ## Documentation
 
