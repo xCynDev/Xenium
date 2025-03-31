@@ -130,7 +130,8 @@ internal static class XeniumGenerate
         foreach (var modulePath in Directory.EnumerateDirectories(ModuleFolderPath))
         {
             // We have to append a \ or the following will return synergy-modules, always.
-            var directoryName = new DirectoryInfo(Path.GetDirectoryName(modulePath + @"\")!).Name;
+            var fullPath = Path.GetFullPath(modulePath + @"/");
+            var directoryName = new DirectoryInfo(Path.GetDirectoryName(fullPath)!).Name;
             if (!GeneratedModules.Contains(directoryName))
             {
                 await GenerateModuleAsync(directoryName);
