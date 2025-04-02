@@ -20,6 +20,31 @@ As such, I have built a tool that would keep my benefits of using a module loade
 - CI friendly, can be used as a build step when deploying your addons & gamemodes to servers.
 - Tiny! Using .NET's Native AOT, the binary is self-contained and does not require a .NET runtime to function.
 
+## Download
+
+Head over to the latest [releases](https://github.com/xCynDev/Xenium/releases) and download the Xenium binaries for your OS.
+Releases include Windows & Linux. Head over to the [Building](https://github.com/xCynDev/Xenium?tab=readme-ov-file#building)
+section of the README for instructions on how to build for different operating systems.
+
 ## Documentation
 
-WIP
+Check the [wiki](https://github.com/xCynDev/Xenium/wiki) out to learn how to use this tool.
+
+## Building
+
+Install the [.NET 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) for your platform of choice.
+
+Then run the following in the root directory of the repository.
+```sh
+# Build for Windows
+dotnet publish -c Release --os win
+
+# Build for Linux
+dotnet publish -c Release --os linux
+
+# Build for MacOS
+dotnet publish -c Release --os osx
+
+```
+
+Xenium has been tested on Windows & Linux. MacOS should work, but hasn't been tested. You can find .NET runtime identifiers (RIDs) [here](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog).
