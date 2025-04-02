@@ -1,0 +1,82 @@
+name: Release Version
+on:
+  push:
+    tags: 'v*.*.*'
+
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: 
+          - runner: 'windows-latest'
+            rid: 'win'
+          - runner: 'ubuntu-latest'
+            rid: 'linux'
+
+    name: Publish .NET Native AOT (${{matrix.os.rid}})
+    runs-on: ${{matrix.os.runner}}
+
+    steps:
+      # Get the ref that triggered this workflow.
+      - name: Checkout Xenium
+        uses: actions/checkout@v4
+
+      # CD to the workspace
+      - name: CD Workspace
+        run: cd $GITHUB_WORKSPACE
+
+      # Install .NET 9
+      - name: Install .NET 9 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      # Build Xenium
+      - name: Build Xenium
+        run: dotnet publish -c Release --os ${{matrix.os.rid}} -o RunnerBuildOutput
+
+      # Archive the executable and PDB together.
+      - name: Archive artifacts
+        uses: ihiroky/archive-action@v1
+        with:
+          root_dir: $GITHUB_WORKSPACE/RunnerBuildOutput/
+          file_path: $GITHUB_WORKSPACE/Xenium-${{matrix.os.rid}}.zip
+          verbose: true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Xenium-${{matrix.os.rid}}
+          path: $GITHUB_WORKSPACE/Xenium-${{matrix.os.rid}}.zip
+
+  release:
+    name: Release Xenium ${{github.ref_name}}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Make a directory to download artifacts to
+      - name: Make artifacts directory
+        run: mkdir artifacts
+
+      # Download artifacts to artifacts folder.
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: Xenium-*
+          merge-multiple: true
+
+      # Make release with artifacts
+      - name: Make release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/Xenium-linux.zip
+            artifacts/Xenium-win.zip
+          fail_on_unmatched_files: true
+          
+    
+  
+      
+    
