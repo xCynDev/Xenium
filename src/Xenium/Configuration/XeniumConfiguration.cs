@@ -32,8 +32,8 @@ public class XeniumConfiguration
     /// These will be included in the client realm only.
     /// The server will send them via AddCSLuaFile().
     /// </summary>
-    [JsonPropertyName("clientsidePrefixes")]
-    public string[] ClientsidePrefixes { get; set; } = ["cl_"];
+    [JsonPropertyName("clientPrefixes")]
+    public string[] ClientPrefixes { get; set; } = ["cl_"];
 
     /// <summary>
     /// List of prefixes in files that we consider shared.

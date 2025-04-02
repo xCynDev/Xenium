@@ -359,7 +359,7 @@ internal static class XeniumGenerate
             var lowerFile = Path.GetFileName(file).ToLower();
             var fixedPath = file.Replace(@"\", "/")
                 .Replace("//", "/");
-            if (ProjectConfiguration!.ClientsidePrefixes.Any(cl => lowerFile.StartsWith(cl)))
+            if (ProjectConfiguration!.ClientPrefixes.Any(cl => lowerFile.StartsWith(cl)))
             {
                 Utils.LogVerbose($"[CL] {fixedPath}");
                 // File is clientside, append AddCSLuaFile() to server init.
