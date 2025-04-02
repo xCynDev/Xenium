@@ -34,7 +34,7 @@ jobs:
 
       # Build Xenium
       - name: Build Xenium
-        run: dotnet publish -c Release --os ${{matrix.os.rid}} -o RunnerBuildOutput
+        run: dotnet publish -c Release --os ${{matrix.os.rid}} --property:OutputPath=RunnerBuildOutput
 
       # Archive the executable and PDB together.
       - name: Archive artifacts
