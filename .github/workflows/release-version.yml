@@ -40,7 +40,7 @@ jobs:
       - name: Archive artifacts
         uses: ihiroky/archive-action@v1
         with:
-          root_dir: RunnerBuildOutput/publish/
+          root_dir: ./RunnerBuildOutput/publish/
           file_path: Xenium-${{matrix.os.rid}}.zip
           verbose: true
 
