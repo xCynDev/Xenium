@@ -40,18 +40,18 @@ jobs:
       - name: Archive artifacts
         uses: ihiroky/archive-action@v1
         with:
-          root_dir: $GITHUB_WORKSPACE/RunnerBuildOutput/
-          file_path: $GITHUB_WORKSPACE/Xenium-${{matrix.os.rid}}.zip
+          root_dir: RunnerBuildOutput
+          file_path: Xenium-${{matrix.os.rid}}.zip
           verbose: true
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Xenium-${{matrix.os.rid}}
-          path: $GITHUB_WORKSPACE/Xenium-${{matrix.os.rid}}.zip
+          path: Xenium-${{matrix.os.rid}}.zip
 
   release:
-    name: Release Xenium ${{github.ref_name}}
+    name: Release Xenium
     needs: build
     runs-on: ubuntu-latest
     steps:
